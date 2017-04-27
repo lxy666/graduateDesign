@@ -1,11 +1,13 @@
 var koa = require('koa');
 var controller = require('koa-route');
-var app = koa();
 
 var views = require('co-views');
 var render = views('./view', {
     map: {html: 'ejs'}
 });
+
+var a = 100;
+console.console.log("aaaa");
 
 var koa_static = require('koa-static-server');
 var service = require('./service/tripService.js');
@@ -132,33 +134,3 @@ app.use(controller.get('/user_list.html', function*() {
 
 app.listen(3000);
 console.log('Koa server is started!');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
