@@ -37,6 +37,7 @@ app.use(controller.get('/login', function*() {
     this.body = yield service.load(phone, pwd);
 }));
 
+//得到所有游记
 app.use(controller.get('/get_all_raiders', function*() {
     this.set('Cache-Control', 'no-cache');
     this.body = yield service.all_raiders();
