@@ -37,13 +37,6 @@ app.use(controller.get('/login', function*() {
     this.body = yield service.load(phone, pwd);
 }));
 
-
-app.use(controller.get('/get_all_travel_notes', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield service.all_travel_notes();
-}));
-
-
 app.use(controller.get('/get_all_raiders', function*() {
     this.set('Cache-Control', 'no-cache');
     this.body = yield service.all_raiders();
