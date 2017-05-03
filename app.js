@@ -18,7 +18,7 @@ app.use(koa_static({
     maxage: 0
 }));
 
-
+//注册接口
 app.use(controller.get('/register', function*() {
     this.set('Cache-Control', 'no-cache');
     var params = querystring.parse(this.req._parsedUrl.query);
@@ -28,7 +28,7 @@ app.use(controller.get('/register', function*() {
     this.body = yield service.register(phone, pwd, name);
 }));
 
-
+//登录接口
 app.use(controller.get('/login', function*() {
     this.set('Cache-Control', 'no-cache');
     var params = querystring.parse(this.req._parsedUrl.query);
