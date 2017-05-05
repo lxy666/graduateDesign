@@ -6,9 +6,6 @@ var render = views('./view', {
     map: {html: 'ejs'}
 });
 
-var a = 100;
-console.console.log("aaaa");
-
 var koa_static = require('koa-static-server');
 var service = require('./service/tripService.js');
 var querystring = require('querystring');
@@ -37,59 +34,6 @@ app.use(controller.get('/login', function*() {
     this.body = yield service.load(phone, pwd);
 }));
 
-app.use(controller.get('/get_all_raiders', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield service.all_raiders();
-}));
-
-app.use(controller.get('/search_travel_notes', function*() {
-    this.set('Cache-Control', 'no-cache');
-    var params = querystring.parse(this.req._parsedUrl.query);
-    var place = params.place;
-    this.body = yield service.search_travel_notes(place);
-}));
-
-
-app.use(controller.get('/search_raiders', function*() {
-    this.set('Cache-Control', 'no-cache');
-    var params = querystring.parse(this.req._parsedUrl.query);
-    var place = params.place;
-    this.body = yield service.search_raiders(place);
-}));
-
-app.use(controller.get('/user_list', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield service.user_list();
-}));
-
-app.use(controller.get('/add_travel_notes_list', function*() {
-    this.set('Cache-Control', 'no-cache');
-    var params = querystring.parse(this.req._parsedUrl.query);
-    var title = params.title;
-    var date = params.date;
-    var background = params.background;
-    var text1 = params.text1;
-    var img1 = params.img1;
-    var text2 = params.text2;
-    this.body = yield service.add_travel_notes_list(title, date, background, text1, img1, text2);
-}));
-
-app.use(controller.get('/add_raiders_list', function*() {
-    this.set('Cache-Control', 'no-cache');
-    var params = querystring.parse(this.req._parsedUrl.query);
-    var title = params.title;
-    var description = params.description;
-    var details_description = params.details_description;
-    var background = params.background;
-    var text1 = params.text1;
-    var img1 = params.img1;
-    var text2 = params.text2;
-    var img2 = params.img2;
-    var text3 = params.text3;
-    var img3 = params.img3;
-    this.body = yield service.add_raiders_list(title, description, details_description, background, text1, img1, text2, img2, text3, img3);
-}));
-
 //查看版本信息
 app.use(controller.get('/check_version', function*() {
     this.set('Cache-Control', 'no-cache');
@@ -101,30 +45,6 @@ app.use(controller.get('/login.html', function*() {
     this.body = yield render('login');
 }));
 
-app.use(controller.get('/add_raiders_list.html', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield render('add_raiders_list');
-}));
-app.use(controller.get('/add_travel_notes.html', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield render('add_travel_notes');
-}));
-app.use(controller.get('/index.html', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield render('index');
-}));
-app.use(controller.get('/show_raiders.html', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield render('show_raiders');
-}));
-app.use(controller.get('/show_travel_notes.html', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield render('show_travel_notes');
-}));
-app.use(controller.get('/user_list.html', function*() {
-    this.set('Cache-Control', 'no-cache');
-    this.body = yield render('user_list');
-}));
 
 app.listen(3000);
 console.log('Koa server is started!');
